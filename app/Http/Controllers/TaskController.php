@@ -32,6 +32,10 @@ class TaskController extends Controller
         return Responser::collection(TaskResource::collection($tasks));
     }
 
+    /**
+     * @param StoreRequest $request
+     * @return JsonResponse
+     */
     public function store(StoreRequest $request): JsonResponse
     {
         $task = $this->taskRepository->store($request->validated());
@@ -39,6 +43,11 @@ class TaskController extends Controller
         return Responser::created(new TaskResource($task));
     }
 
+    /**
+     * @param UpdateRequest $request
+     * @param Task $task
+     * @return JsonResponse
+     */
     public function update(UpdateRequest $request, Task $task): JsonResponse
     {
         $task = $this->taskRepository->update($task , $request->validated());
@@ -46,22 +55,43 @@ class TaskController extends Controller
         return Responser::success(new TaskResource($task));
     }
 
+    /**
+     * @param Task $task
+     * @return JsonResponse
+     * @throws AuthorizationException
+     */
     public function show(Task $task): JsonResponse
     {
+        $this->authorize('view', $task);
+
         return Responser::info(new TaskResource($task));
     }
 
+    /**
+     * @param Task $task
+     * @return JsonResponse
+     * @throws AuthorizationException
+     */
     public function destroy(Task $task): JsonResponse
     {
+        $this->authorize('delete', $task);
+
         $this->taskRepository->destroy($task);
 
         return Responser::success();
     }
 
+    /**
+     * @param Task $task
+     * @return JsonResponse
+     * @throws AuthorizationException
+     */
     public function complete(Task $task): JsonResponse
     {
+        $this->authorize('complete', $task);
+
         $this->taskRepository->complete($task);
 
-        return Responser::success();
+        return Responser::success(new TaskResource($task));
     }
 }
