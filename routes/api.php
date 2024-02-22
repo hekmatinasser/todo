@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/auth')->group(function () {
@@ -18,6 +19,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthenticationController::class, 'logout'])->name('logout');
     });
 
-
+    Route::post('tasks/{task}/complete', [TaskController::class, 'complete'])->name('tasks.complete');
+    Route::apiResource('tasks', TaskController::class);
 });
 
