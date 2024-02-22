@@ -1,0 +1,363 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Integration APIs",
+        "version": "1.0"
+    },
+    "paths": {
+        "/api": {},
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Authenticate"
+                ],
+                "summary": "Login API",
+                "operationId": "3278db8d52ddcbebd3eccc61cabd65a7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "example": {
+                                    "email": "admin@email.com",
+                                    "password": "123456789"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/forget": {
+            "post": {
+                "tags": [
+                    "Authenticate"
+                ],
+                "summary": "Forget API",
+                "operationId": "c2cf9b4d3e038911dc35e2ec250dc22a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "example": {
+                                    "email": "admin@email.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/auth/reset": {
+            "post": {
+                "tags": [
+                    "Authenticate"
+                ],
+                "summary": "Reset API",
+                "operationId": "cba2c4802b6ad13b64835705e2513e88",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "example": {
+                                    "email": "admin@email.com",
+                                    "code": 111111
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResetResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/set-password": {
+            "post": {
+                "tags": [
+                    "Authenticate"
+                ],
+                "summary": "Set Password API",
+                "operationId": "e68b0427120eb7d9dc0e0a3600a6baf6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "example": {
+                                    "code": "ab5cd3e12f",
+                                    "password": "abcdefg",
+                                    "password_confirmation": "abcdefg"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/profile": {
+            "get": {
+                "tags": [
+                    "Authenticate"
+                ],
+                "summary": "Profile API",
+                "operationId": "5ead6bd07868294a09f595caf887b87c",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ProfileResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Authenticate"
+                ],
+                "summary": "Update Profile API",
+                "operationId": "09c356d1eff8a8bd2ed803518fc567ef",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "example": {
+                                    "first_name": "admin",
+                                    "last_name": "admin"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/change-password": {
+            "post": {
+                "tags": [
+                    "Authenticate"
+                ],
+                "summary": "Change Password API",
+                "operationId": "839e5996d88adbbbef53b42b15d16711",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "example": {
+                                    "current": "123456789",
+                                    "password": "abcdefg",
+                                    "password_confirmation": "abcdefg"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authenticate"
+                ],
+                "summary": "Logout API",
+                "operationId": "fb8d94b2e2479a08edb50c7e08ff4414",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ProfileResource": {
+                "type": "object",
+                "example": {
+                    "messages": [
+                        {
+                            "type": "success",
+                            "text": "responser::response.info"
+                        }
+                    ],
+                    "data": {
+                        "user": {
+                            "id": 1,
+                            "first_name": "admin",
+                            "last_name": "admin",
+                            "has_photo": true,
+                            "avatar": "http://localhost/storage/avatars/WHpLT1j15OCB3R3XtjGBfFq1aMekLK9YLwSP77P2.png",
+                            "has_two_factor_secret": true,
+                            "status": "ACTIVATE",
+                            "email": "admin@email.com",
+                            "created_at": "2024-01-12 19:36:55"
+                        }
+                    },
+                    "meta": []
+                }
+            },
+            "SuccessResource": {
+                "type": "object",
+                "example": {
+                    "messages": [
+                        {
+                            "type": "success",
+                            "text": "responser::response.success"
+                        }
+                    ],
+                    "data": [],
+                    "meta": []
+                }
+            },
+            "LoginResource": {
+                "type": "object",
+                "example": {
+                    "messages": [
+                        {
+                            "type": "success",
+                            "text": "responser::response.success"
+                        }
+                    ],
+                    "data": {
+                        "token": "5|IpBNzS8V0wxng78EQ6zyS3wj4e0olVhUVHt1srDm5690ceac",
+                        "user": {
+                            "id": 1,
+                            "first_name": "admin",
+                            "last_name": "admin",
+                            "has_photo": true,
+                            "avatar": "http://localhost/storage/avatars/WHpLT1j15OCB3R3XtjGBfFq1aMekLK9YLwSP77P2.png",
+                            "has_two_factor_secret": true,
+                            "status": "ACTIVATE",
+                            "email": "admin@email.com",
+                            "created_at": "2024-01-12 19:36:55"
+                        }
+                    },
+                    "meta": []
+                }
+            },
+            "ResetResource": {
+                "type": "object",
+                "example": {
+                    "messages": [
+                        {
+                            "type": "success",
+                            "text": "responser::response.success"
+                        }
+                    ],
+                    "data": {
+                        "code": "eyJpdiI6InVFM2xZS2R2NVp0QzJ2SWRveEttSWc9PSIsInZhbHVlIjoiQit4SU5BVEpKd3hDOWgrQy9jRmtLcHN0SkN2c1ZuSGcvcEpSTWNsZlArWT0iLCJtYWMiOiI2MDY0MTc5YWJlZDAzNDE3YTg1ODE1OWRjN2Y0ZGY0NjQwNTQ4YmU4M2YyYjk5YjNmZjczMjNjY2YzMTdiMjZiIiwidGFnIjoiIn0="
+                    },
+                    "meta": []
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
