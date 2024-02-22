@@ -6,6 +6,42 @@
     },
     "paths": {
         "/api": {},
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Authenticate"
+                ],
+                "summary": "Register API",
+                "operationId": "67c6e109293e8282de97b9714cfef443",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "example": {
+                                    "email": "admin@email.com",
+                                    "password": "123456789",
+                                    "password_confirmation": "123456789"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResource"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/auth/login": {
             "post": {
                 "tags": [

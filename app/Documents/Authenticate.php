@@ -10,6 +10,24 @@ namespace App\Documents;
  * @OA\Schema(schema="ResetResource", type="object", example={ "messages": { { "type": "success", "text": "responser::response.success" } }, "data": { "code": "eyJpdiI6InVFM2xZS2R2NVp0QzJ2SWRveEttSWc9PSIsInZhbHVlIjoiQit4SU5BVEpKd3hDOWgrQy9jRmtLcHN0SkN2c1ZuSGcvcEpSTWNsZlArWT0iLCJtYWMiOiI2MDY0MTc5YWJlZDAzNDE3YTg1ODE1OWRjN2Y0ZGY0NjQwNTQ4YmU4M2YyYjk5YjNmZjczMjNjY2YzMTdiMjZiIiwidGFnIjoiIn0=" }, "meta": {} })
  *
  * @OA\Post(
+ *     path="/api/auth/register",
+ *     tags={"Authenticate"},
+ *     summary="Register API",
+ *     @OA\RequestBody(required=true,
+ *          @OA\MediaType(
+ *              mediaType="application/json",
+ *              @OA\Schema(required={},
+ *                  example={"email": "admin@email.com","password": "123456789","password_confirmation": "123456789"}
+ *              )
+ *          )
+ *     ),
+ *     @OA\Response(response=200, description="Success",
+ *     @OA\MediaType(mediaType="application/json",
+ *       @OA\Schema(type="object",ref="#/components/schemas/LoginResource")
+ *     )
+ *   ),
+ * )
+ * @OA\Post(
  *     path="/api/auth/login",
  *     tags={"Authenticate"},
  *     summary="Login API",
