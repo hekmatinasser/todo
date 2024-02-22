@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class TaskRepository extends BaseRepository implements TaskRepositoryInterface
 {
+    public function __construct(Task $task)
+    {
+        parent::__construct($task);
+    }
 
     public function query(Builder $query, array $parameters): Builder
     {
@@ -19,7 +23,7 @@ class TaskRepository extends BaseRepository implements TaskRepositoryInterface
     {
         $parameters['user_id'] = auth()->id();
 
-        return parent::store($parameters);
+        return parent::store($parameters)->refresh();
     }
 
     public function complete(Task $task): Task
@@ -27,6 +31,6 @@ class TaskRepository extends BaseRepository implements TaskRepositoryInterface
         $task->completed_at = now();
         $task->save();
 
-        return $task;
+        return $task->refresh();
     }
 }
