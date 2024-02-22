@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\Task\StoreRequest;
+use App\Http\Requests\Task\UpdateRequest;
+use App\Http\Resources\TaskResource;
+use App\Models\Task;
+use App\Repositories\Task\TaskRepositoryInterface;
+use Celysium\Responser\Responser;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
+class TaskController extends Controller
+{
+    public function __construct(protected TaskRepositoryInterface $taskRepository)
+    {
+    }
+
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws AuthorizationException
+     */
+    public function index(Request $request): JsonResponse
+    {
+        $this->authorize('viewAny', Task::class);
+
+        $tasks = $this->taskRepository->index($request->all());
+
+        return Responser::collection(TaskResource::collection($tasks));
+    }
+
+    public function store(StoreRequest $request): JsonResponse
+    {
+        $task = $this->taskRepository->store($request->validated());
+
+        return Responser::created(new TaskResource($task));
+    }
+
+    public function update(UpdateRequest $request, Task $task): JsonResponse
+    {
+        $task = $this->taskRepository->update($task , $request->validated());
+
+        return Responser::success(new TaskResource($task));
+    }
+
+    public function show(Task $task): JsonResponse
+    {
+        return Responser::info(new TaskResource($task));
+    }
+
+    public function destroy(Task $task): JsonResponse
+    {
+        $this->taskRepository->destroy($task);
+
+        return Responser::success();
+    }
+
+    public function complete(Task $task): JsonResponse
+    {
+        $this->taskRepository->complete($task);
+
+        return Responser::success();
+    }
+}
