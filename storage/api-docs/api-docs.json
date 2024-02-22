@@ -305,6 +305,223 @@
                     }
                 ]
             }
+        },
+        "/api/tasks": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "list Task API",
+                "operationId": "1d403e6635b90851c520cd710eb619c8",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TasksResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Task Create API",
+                "operationId": "2d72d39cb4de213bb8d219a472abfb70",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "example": {
+                                    "title": "Indoor sports"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/tasks/{id}": {
+            "get": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Task Show API",
+                "operationId": "9d2ea5f1c7ed2641039ec9ce7fac1fac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Task Show API",
+                "operationId": "3203f2e74812d3ed714ff99351646a70",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Task Update API",
+                "operationId": "261489a50c3380bcf2d0916ff401372c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [],
+                                "example": {
+                                    "title": "Indoor sports",
+                                    "description": "4*10 Stretching movement"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/tasks/{id}/complete": {
+            "post": {
+                "tags": [
+                    "Task"
+                ],
+                "summary": "Complete Task API",
+                "operationId": "aea6d999ec5a03afd7e56ab5bc7b50b7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/TaskResource"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -384,6 +601,58 @@
                     ],
                     "data": {
                         "code": "eyJpdiI6InVFM2xZS2R2NVp0QzJ2SWRveEttSWc9PSIsInZhbHVlIjoiQit4SU5BVEpKd3hDOWgrQy9jRmtLcHN0SkN2c1ZuSGcvcEpSTWNsZlArWT0iLCJtYWMiOiI2MDY0MTc5YWJlZDAzNDE3YTg1ODE1OWRjN2Y0ZGY0NjQwNTQ4YmU4M2YyYjk5YjNmZjczMjNjY2YzMTdiMjZiIiwidGFnIjoiIn0="
+                    },
+                    "meta": []
+                }
+            },
+            "TasksResource": {
+                "type": "object",
+                "example": {
+                    "messages": [
+                        {
+                            "type": "success",
+                            "text": "responser::response.info"
+                        }
+                    ],
+                    "data": [
+                        {
+                            "id": 3,
+                            "user": {
+                                "id": 1,
+                                "name": null,
+                                "email": "admin@email.com",
+                                "created_at": "2024-02-22 22:00:13"
+                            },
+                            "title": "Indoor sports",
+                            "description": null,
+                            "completed_at": null,
+                            "created_at": "2024-02-22 22:05:07"
+                        }
+                    ],
+                    "meta": []
+                }
+            },
+            "TaskResource": {
+                "type": "object",
+                "example": {
+                    "messages": [
+                        {
+                            "type": "success",
+                            "text": "responser::response.info"
+                        }
+                    ],
+                    "data": {
+                        "id": 3,
+                        "user": {
+                            "id": 1,
+                            "name": null,
+                            "email": "admin@email.com",
+                            "created_at": "2024-02-22 22:00:13"
+                        },
+                        "title": "Indoor sports",
+                        "description": null,
+                        "completed_at": null,
+                        "created_at": "2024-02-22 22:05:07"
                     },
                     "meta": []
                 }
