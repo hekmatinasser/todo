@@ -21,7 +21,7 @@ class TaskResource extends JsonResource
             'user'         => new UserResource($this->user),
             'title'        => $this->title,
             'description'  => $this->description,
-            'completed_at' => $this->completed_at->toDateTimeString(),
+            'completed_at' => $this->completed_at?->toDateTimeString(),
             'created_at'   => $this->created_at->toDateTimeString(),
         ];
     }
