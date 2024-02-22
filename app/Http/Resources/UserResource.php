@@ -18,18 +18,11 @@ class UserResource extends JsonResource
         /** @var User $this */
         return [
             'user'        => [
-                'id'                    => $this->id,
-                'first_name'            => $this->first_name,
-                'last_name'             => $this->last_name,
-                'has_photo'             => (bool)$this->photo,
-                'avatar'                => $this->avatar,
-                'email'                 => $this->email,
-                'has_two_factor_secret' => (bool)$this->two_factor_secret,
-                'status'                => $this->status->name,
-                'created_at'            => $this->created_at->toDateTimeString(),
+                'id'         => $this->id,
+                'name'       => $this->name,
+                'email'      => $this->email,
+                'created_at' => $this->created_at->toDateTimeString(),
             ],
-            'roles'       => $this->cacheRole(),
-            'permissions' => array_map(fn($permission) => $permission['name'], $this->cachePermissions()),
         ];
     }
 }
