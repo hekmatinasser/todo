@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
 /**
+ * @property int $id
  * @property int $user_id
  * @property string $title
  * @property string $description
  * @property Carbon $completed_at
  * @property Carbon $created_at
  * @property Carbon $updated_at
+ * @property User $user
  */
 class Task extends Model
 {
