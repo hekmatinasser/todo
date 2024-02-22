@@ -37,7 +37,7 @@ class TaskPolicy
      */
     public function update(User $user, Task $task): bool
     {
-        return $user->id == $task->user_id;
+        return $user->id == $task->user_id && $task->completed_at == null;
     }
 
     /**
@@ -46,5 +46,13 @@ class TaskPolicy
     public function delete(User $user, Task $task): bool
     {
         return $user->id == $task->user_id;
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function complete(User $user, Task $task): bool
+    {
+        return $user->id == $task->user_id && $task->completed_at == null;
     }
 }
