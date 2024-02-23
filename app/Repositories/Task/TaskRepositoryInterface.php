@@ -9,4 +9,6 @@ interface TaskRepositoryInterface extends BaseRepositoryInterface
 {
     public function complete(Task $task): Task;
 
+    public function autoComplete(int $deadline): void;
+
 }

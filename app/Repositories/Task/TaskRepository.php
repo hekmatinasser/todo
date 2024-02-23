@@ -33,4 +33,13 @@ class TaskRepository extends BaseRepository implements TaskRepositoryInterface
 
         return $task->refresh();
     }
+
+    public function autoComplete(int $deadline): void
+    {
+        $this->model->query()
+            ->where('created_at', '<', now()->subHours($deadline))
+            ->whereNull('completed_at')
+            ->get()
+            ->map(fn($task) => $this->complete($task));
+    }
 }
