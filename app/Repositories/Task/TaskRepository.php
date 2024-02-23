@@ -3,6 +3,7 @@
 namespace App\Repositories\Task;
 
 use App\Models\Task;
+use App\Notifications\TaskComplete;
 use Celysium\Base\Repository\BaseRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -30,8 +31,11 @@ class TaskRepository extends BaseRepository implements TaskRepositoryInterface
     {
         $task->completed_at = now();
         $task->save();
+        $task->refresh();
 
-        return $task->refresh();
+        $task->user->notify(new TaskComplete($task));
+
+        return $task;
     }
 
     public function autoComplete(int $deadline): void
